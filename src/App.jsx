@@ -11,6 +11,7 @@ import UserTable from './components/UserTable';
 import TransectionForm from './components/TransectionForm';
 import TransactionFormWithConverter from './NotIn/TransactionFormWithConverter';
 import T from './NotIn/T';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   // const base_code = 'BDT';
@@ -55,7 +56,9 @@ function App() {
       <UserTable></UserTable>
       <TransectionForm></TransectionForm> */}
       {/* <TransactionFormWithConverter></TransactionFormWithConverter> */}
-      <T></T>
+      {/* <T></T> */}
+      <AddUser></AddUser>
+      <Outlet></Outlet>
     </>
   )
 }

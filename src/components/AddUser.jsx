@@ -1,18 +1,27 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddUser = () => {
-  const { register, handleSubmit , formState: { errors } } = useForm();
-
+  const { register, handleSubmit ,reset , formState: { errors } } = useForm();
+  const [isNavitage,setIsNavitage] =useState(false);
+  
   const onSubmit = (data) => {
     const uuid = uuidv4();
     const AmountBDT=1000
     const formData = { ...data, AmountBDT };
     // console.log(formData)
-    localStorage.setItem(uuid , JSON.stringify(formData));
-    // reset() add later
+   localStorage.setItem(uuid , JSON.stringify(formData));
+    //   reset(); //add later
+     setIsNavitage(true)
+    
   };
-
+  
+  if(isNavitage){
+    return <Navigate to="/"  replace></Navigate>
+  }
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div className="mb-4 flex items-center gap-2">
@@ -20,14 +29,15 @@ const AddUser = () => {
          Name:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
-          id="name"
-          type="text"
-          placeholder="Full Name"
-          {...register("name", { required: true, pattern: /^[A-Za-z]+$/i })}
-        />
-        {errors.name && errors.name.type === "required" && <p className="text-red-500 text-xs italic">This field is required</p>}
-        {errors.name && errors.name.type === "pattern" && <p className="text-red-500 text-xs italic">Name must contain only letters</p>}
+  className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
+  id="name"
+  type="text"
+  placeholder="Full Name"
+  {...register("name", { required: true, pattern: /^[A-Za-z ]+(?: [A-Za-z ]+)?$/ })}
+/>
+{errors.name && errors.name.type === "required" && <p className="text-red-500 text-xs italic">This field is required</p>}
+{errors.name && errors.name.type === "pattern" && <p className="text-red-500 text-xs italic">Name must contain only letters</p>}
+
       </div>
       <div className="mb-4 flex items-center gap-2">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">

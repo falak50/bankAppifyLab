@@ -1,4 +1,5 @@
 import  { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function UserTable() {
   const [userData, setUserData] = useState([]);
@@ -7,8 +8,11 @@ export default function UserTable() {
 
   useEffect(() => {
     const dataFromLocalStorage = Object.entries(localStorage).map(([key, value]) => {
-      return { uuid: key, ...JSON.parse(value) };
+        // console.log('from user table key,value',key,value);
+        return { uuid: key, ...JSON.parse(value) };
     });
+    //todo : jar uuid history take filter kore bad dia 
+    // aro ek ta id nite hobe  
     setUserData(dataFromLocalStorage);
   }, []); 
 
@@ -34,10 +38,10 @@ export default function UserTable() {
     setSearchBy(e.target.value);
   };
 
-  const handleAddUser = () => {
-   // TODO
-    console.log('Add User clicked');
-  };
+//   const handleAddUser = () => {
+//    // TODO
+//     console.log('Add User clicked');
+//   };
 
   return (
     <div className="overflow-x-auto">
@@ -48,7 +52,7 @@ export default function UserTable() {
             value={searchBy}
             onChange={handleSearchByChange}
           >
-            <option value="id">ID</option>
+            <option value="id">Acount ID</option>
             <option value="name">Name</option>
           </select>
           <input
@@ -59,18 +63,17 @@ export default function UserTable() {
             onChange={handleSearchChange}
           />
         </div>
-        <button
-          className="btn bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-4"
-          onClick={handleAddUser}
-        >
-          Add User
-        </button>
+       
+        <Link className="btn bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-4" to='AddUser'>Add User</Link>
+          
+
+        
       </div>
       <table className="table-auto w-full border-collapse border">
         <thead>
           <tr>
             <th className="border px-4 py-2">Name</th>
-            <th className="border px-4 py-2">ID</th>
+            <th className="border px-4 py-2">Account ID</th>
             <th className="border px-4 py-2">Email</th>
             <th className="border px-4 py-2">AmountBDT</th>
             <th className="border px-4 py-2">Action</th>

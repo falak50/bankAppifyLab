@@ -16,10 +16,10 @@ export default function UserTable() {
     setUserData(dataFromLocalStorage);
   }, []); 
 
-  const handleTransaction = (uuid) => {
-    //TODO Laterrr
-    console.log(`Transaction UUID: ${uuid}`);
-  };
+//   const handleTransaction = (uuid) => {
+//     //TODO Laterrr
+//     console.log(`Transaction UUID: ${uuid}`);
+//   };
 
   const filteredData = userData.filter((user) => {
     if (searchBy === 'id') {
@@ -87,12 +87,14 @@ export default function UserTable() {
               <td className="border px-4 py-2">{user.email}</td>
               <td className="border px-4 py-2">{user.AmountBDT}</td>
               <td className="border px-4 py-2">
-                <button
+                {/* <button
                   className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={() => handleTransaction(user.uuid)}
                 >
                   Transaction
-                </button>
+                </button> */}
+                {/* <Link to={/transaction/}>Transection</Link> */}
+                <Link to={`/transaction/${user.uuid}`}>Transaction</Link>
               </td>
             </tr>
           ))}

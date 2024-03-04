@@ -1,42 +1,46 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useFetchData from '../Data/useBasecodeFetch';
+// import useFetchData from '../Data/useBasecodeFetch';
+import useApiHook from '../Data/useApiHook';
 
 const T = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-
+    
     ////  DATA CALL
+    
     const base_code = 'BDT';
-    const url = `https://open.er-api.com/v6/latest/${base_code}`;
-    const { data, loading, error } = useFetchData(url);
+    const [currency, setCurrency] = useState('BDT');
+    const url = `https://open.er-api.com/v6/latest/${currency}`;
+    // const base_url = `https://open.er-api.com/v6/latest/${base_code}`;
+    const { data, loading, error } = useApiHook(url);
+    // const { base_data, base_loading, base_error } = useApiHook(base_url);
 
-    const [currency, setCurrency] = useState('AED'); // Default currency selection
+    // const [currency, setCurrency] = useState('AED'); // Default currency selection
     const [convertedAmount, setConvertedAmount] = useState(null);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    if (loading ) {     return <div>Loading...</div>;}
+    if (error) {return <div>Error: {error.message}</div>; }
+    // if (base_loading ) {     return <div>Loading...</div>;}
+    // if (base_error) {return <div>Error: {error.message}</div>; }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-
-    console.log(data.rates)
-
+    // console.log(data.rates)
+    console.log('base data ',data)
+    // console.log('normal data ',base_data)
     const ratesObj = data.rates
-
+    // const rateBaseArr = base_data.rates;
     const handleConvert = (formData) => {
         const { amount } = formData;
         if (amount <= 0) {
             alert("Amount should be greater than 0");
             return;
         } else {
-            const converted = parseFloat(amount) * ratesObj[currency];
+            const converted = parseFloat(amount) / ratesObj[currency];
             setConvertedAmount(converted);
         }
     };
 
     const onSubmit = (data) => {
+        console.log('submit click')
         handleConvert(data);
         // Additional logic to handle form submission
         console.log("Submitted data:", {
@@ -63,7 +67,7 @@ const T = () => {
                 </div>
                 <div className="mb-4 flex items-center gap-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-                        Amount in BDT:
+                        Amount in {currency}:
                     </label>
                     <input
                         className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
@@ -102,7 +106,7 @@ const T = () => {
             {convertedAmount && (
                 <div>
                     <p>
-                        Converted amount: {convertedAmount.toFixed(2)} {currency}
+                        Converted amount: {convertedAmount.toFixed(2)} {base_code}
                     </p>
                 </div>
             )}

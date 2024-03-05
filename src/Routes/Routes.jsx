@@ -10,6 +10,8 @@ import AddUser from "../components/AddUser";
 import Transaction from "../Pages/Transaction";
 import UserDetails from "../components/UserDetails";
 import TransactionHistory from "../Pages/TransactionHistory";
+import DepositForm from "../components/DepositForm";
+import WithdrawForm from "../components/WithdrawForm";
 
 
  export const  router = createBrowserRouter([
@@ -31,11 +33,11 @@ import TransactionHistory from "../Pages/TransactionHistory";
         },
         {
             path: `/deposit/:id`,
-            element:<Transaction></Transaction>
+            element:<DepositForm></DepositForm>
         },
         {
             path: `/withdraw/:id`,
-            element:<Transaction></Transaction>
+            element:<WithdrawForm></WithdrawForm>
         },
         {
             path: `/userDelails/:id`,

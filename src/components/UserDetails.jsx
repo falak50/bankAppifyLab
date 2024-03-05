@@ -1,11 +1,21 @@
-import  { } from 'react';
+
 import { useParams } from 'react-router-dom';
 
 const UserDetails = () => {
   const { id } = useParams();
   console.log(id);
+  const typedata = {
+  deposit:'deposit',
+  withdraw:'withdraw',
+  history: 'history'
+}
   const user=JSON.parse(localStorage.getItem(id));
   console.log('user info ',user);
+  const userWithdraw=JSON.parse(localStorage.getItem(typedata.withdraw));
+  const userDeposit=JSON.parse(localStorage.getItem(typedata.deposit));
+  const userTransection=JSON.parse(localStorage.getItem(typedata.history));
+  console.log('userTransection -> ',userTransection)
+  //console.log("ALL deposite  :",userDeposit);
   //  const  user = {
   //   AmountBDT:870.367493277562,
   //   age : "123",
@@ -25,36 +35,59 @@ const UserDetails = () => {
         <div className="text-gray-700 mb-2">Phone : {user.phone}</div>
         <div className="text-gray-700 mb-2">Age : {user.age}</div>
         <div className="text-gray-700">Acount Number : 213ydhgy238134679 </div>
+        <div className="text-gray-700">Amount In BDT :{parseFloat(user.AmountBDT).toFixed(2)}  </div>
     </div>
-    <table className="w-full mb-8">
-        <thead>
-            <tr>
-                <th className="text-left font-bold text-gray-700">Transaction</th>
-                <th className="text-right font-bold text-gray-700">Amount</th>
-            </tr>
-        </thead>
-        <h1>Coming soon</h1>
-        {/* <tbody>
-            <tr>
-                <td className="text-left text-gray-700">Product 1</td>
-                <td className="text-right text-gray-700">$100.00</td>
-            </tr>
-            <tr>
-                <td className="text-left text-gray-700">Product 2</td>
-                <td className="text-right text-gray-700">$50.00</td>
-            </tr>
-            <tr>
-                <td className="text-left text-gray-700">Product 3</td>
-                <td className="text-right text-gray-700">$75.00</td>
-            </tr>
-        </tbody> */}
-        {/* <tfoot>
-            <tr>
-                <td className="text-left font-bold text-gray-700">Total</td>
-                <td className="text-right font-bold text-gray-700">$225.00</td>
-            </tr>
-        </tfoot> */}
-    </table>
+    
+    
+    <div>
+        <h1  className='text-lg font-bold text-gray-700 mb-2'>Withdraw  Delaits</h1>
+        {userWithdraw &&
+               userWithdraw.map((x,i)=>{
+            console.log(x.uuid);
+            const str=`${x.date} :  ${x.type} ${x.amount} ${x.currency}`
+            if(x.uuid==id)
+               return <li
+               key={i}
+               >{str}</li>
+               })
+            }
+
+    </div>
+    <div>
+        <h1  className='text-lg font-bold text-gray-700 mb-2'>Deposit  Delaits</h1>
+        {userDeposit &&
+               userDeposit.map((x,i)=>{
+            console.log(x.uuid);
+            const str=`${x.date} :   ${x.type} ${x.amount} ${x.currency}`
+            if(x.uuid==id)
+               return <li
+               key={i}
+               >{str}</li>
+               })
+            }
+
+    </div>
+    <div>
+        <h1  className='text-lg font-bold text-gray-700 mb-2'>Transection  Delaits</h1>
+        {userTransection &&
+               userTransection.map((x,i)=>{
+                console.log(x)
+                console.log('sid ',x?.receiveUser.uuid)
+                console.log('rid->',x?.receiveUser.uuid)
+                console.log('id->',id)
+             console.log(x?.sendUser.uuid);
+            const str=`${x?.sendUser.name} Send ${
+                x.amount} ${x.currency} to ${x.receiveUser.name}`
+                
+            if(id==x.receiveUser.uuid || id==x.sendUser.uuid)
+               return <li
+               key={i}
+               >{str}</li>
+               })
+            }
+
+    </div>
+         
     <div className="text-gray-700 mb-2">Thank you for your Open acount </div>
    
 </div>

@@ -10,8 +10,9 @@ const Transaction = () => {
     //  data fetch end 
     const { id } = useParams();
     console.log(id);
-    const user=JSON.parse(localStorage.getItem(id));
-    console.log('user info ',user);
+    // const user=JSON.parse(localStorage.getItem(id));
+    // console.log('user info ',user); 
+    // this is not working 
 
 
     return (

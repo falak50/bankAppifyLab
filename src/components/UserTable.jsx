@@ -23,9 +23,9 @@ export default function UserTable() {
 
   const filteredData = userData.filter((user) => {
     if (searchBy === 'id') {
-      return user.uuid.toLowerCase().includes(searchTerm.toLowerCase());
+      return user?.uuid?.toLowerCase().includes(searchTerm.toLowerCase());
     } else if (searchBy === 'name') {
-      return user.name.toLowerCase().includes(searchTerm.toLowerCase());
+      return user?.name?.toLowerCase().includes(searchTerm.toLowerCase());
     }
     return true;
   });
@@ -42,7 +42,11 @@ export default function UserTable() {
 //    // TODO
 //     console.log('Add User clicked');
 //   };
-
+const typedata = {
+  deposit:'deposit',
+  withdraw:'withdraw',
+  history: 'history'
+}
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-between mb-4">
@@ -83,14 +87,21 @@ export default function UserTable() {
         <tbody>
             
         {filteredData.map((user) => (
-  user.uuid !== "history" && localStorage.getItem(user.uuid) && (
+   user.uuid !== typedata.history &&
+   user.uuid !== typedata.withdraw &&
+   user.uuid !== typedata.deposit &&
+   localStorage.getItem(user.uuid) && (
     <tr key={user.uuid} className="border">
       <td className="border px-4 py-2">{user.name}</td>
       <td className="border px-4 py-2">{user.uuid}</td>
       <td className="border px-4 py-2">{user.email}</td>
-      <td className="border px-4 py-2">{user.AmountBDT}</td>
+      <td className="border px-4 py-2">{parseFloat(user.AmountBDT).toFixed(2)}</td>
       <td className="border px-4 py-2">
-        <Link to={`/transaction/${user.uuid}`}>Transaction</Link>
+      <div className='flex flex-row gap-2'>
+    <Link to={`/transaction/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Transaction</Link>
+    <Link to={`/deposit/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Deposit</Link>
+    <Link to={`/withdraw/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Withdraw</Link>
+  </div>
       </td>
       <td className="border px-4 py-2">
         <Link to={`/userDelails/${user.uuid}`}>Delails</Link>

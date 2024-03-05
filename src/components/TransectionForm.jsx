@@ -175,13 +175,13 @@ const TransectionForm = ({sendMoneyID}) => {
             </button>
         </div>
     </form>
-    {convertedAmount && (
+    {/* {convertedAmount && (
         <div>
             <p>
                 Converted amount: {convertedAmount.toFixed(2)} {base_code}
             </p>
         </div>
-    )}
+    )} */}
 </div>
   );
 };

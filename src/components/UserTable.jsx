@@ -77,27 +77,29 @@ export default function UserTable() {
             <th className="border px-4 py-2">Email</th>
             <th className="border px-4 py-2">AmountBDT</th>
             <th className="border px-4 py-2">Action</th>
+            <th className="border px-4 py-2">Details</th>
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((user) => (
-            <tr key={user.uuid} className="border">
-              <td className="border px-4 py-2">{user.name}</td>
-              <td className="border px-4 py-2">{user.uuid}</td>
-              <td className="border px-4 py-2">{user.email}</td>
-              <td className="border px-4 py-2">{user.AmountBDT}</td>
-              <td className="border px-4 py-2">
-                {/* <button
-                  className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  onClick={() => handleTransaction(user.uuid)}
-                >
-                  Transaction
-                </button> */}
-                {/* <Link to={/transaction/}>Transection</Link> */}
-                <Link to={`/transaction/${user.uuid}`}>Transaction</Link>
-              </td>
-            </tr>
-          ))}
+            
+        {filteredData.map((user) => (
+  user.uuid !== "history" && localStorage.getItem(user.uuid) && (
+    <tr key={user.uuid} className="border">
+      <td className="border px-4 py-2">{user.name}</td>
+      <td className="border px-4 py-2">{user.uuid}</td>
+      <td className="border px-4 py-2">{user.email}</td>
+      <td className="border px-4 py-2">{user.AmountBDT}</td>
+      <td className="border px-4 py-2">
+        <Link to={`/transaction/${user.uuid}`}>Transaction</Link>
+      </td>
+      <td className="border px-4 py-2">
+        <Link to={`/userDelails/${user.uuid}`}>Delails</Link>
+      </td>
+    </tr>
+  )
+))}
+
+
         </tbody>
       </table>
     </div>

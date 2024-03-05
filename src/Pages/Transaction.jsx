@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
-import T from "../NotIn/T";
 import TransectionForm from "../components/TransectionForm";
 
 
 const Transaction = () => {
-
+     
     //data fetch start
     
 
@@ -16,16 +15,19 @@ const Transaction = () => {
 
 
     return (
-        <div>
-           <div className="bg-[gray] items-center w-[30%] m-auto px-10 py-10 ">
-            <h1>User Info </h1>
-            <h1>Name :  {user?.name} </h1>
-            <h1>Total : {user?.AmountBDT} USD </h1>
-            <p>Acount id : {id} </p>
+        <div className="m-10">
+           <div className="bg-[#deabab] items-center w-[32%] m-auto px-10 py-10 ">
+            <h1>User Information </h1>
+            {/* <h1>Name :  {user?.name} </h1>
+            <h1>Total : {user?.AmountBDT} USD </h1> */}
+            {/* <p>Acount id : {id} </p> */}
            </div>
            
            {/* <Transaction></Transaction> */}
-            <TransectionForm></TransectionForm>
+
+            <TransectionForm 
+            sendMoneyID={id}
+            ></TransectionForm>
 
             
         </div>

@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 
-const UserDetails = ({ user, onUpdate, onDelete }) => {
+
+const UserUpdate= ({ user, onUpdate, onDelete }) => {
   const [editedUser, setEditedUser] = useState({ ...user });
 
   const handleInputChange = (e) => {
@@ -82,4 +83,4 @@ const UserDetails = ({ user, onUpdate, onDelete }) => {
   );
 };
 
-export default UserDetails;
+export default UserUpdate;

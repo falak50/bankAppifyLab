@@ -8,6 +8,8 @@ import Navber from "../components/Navber";
 import Main from "../Pages/Main";
 import AddUser from "../components/AddUser";
 import Transaction from "../Pages/Transaction";
+import UserDetails from "../components/UserDetails";
+import TransactionHistory from "../Pages/TransactionHistory";
 
 
  export const  router = createBrowserRouter([
@@ -28,8 +30,20 @@ import Transaction from "../Pages/Transaction";
             element:<Transaction></Transaction>
         },
         {
+            path: `/deposit/:id`,
+            element:<Transaction></Transaction>
+        },
+        {
+            path: `/withdraw/:id`,
+            element:<Transaction></Transaction>
+        },
+        {
+            path: `/userDelails/:id`,
+            element:<UserDetails></UserDetails>
+        },
+        {
             path:'/history',
-            element:<Home></Home>
+            element:<TransactionHistory></TransactionHistory>
         },
        
       ]

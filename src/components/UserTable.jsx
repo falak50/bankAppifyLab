@@ -52,7 +52,7 @@ const typedata = {
       <div className="flex justify-between mb-4">
         <div className="flex items-center">
           <select
-            className="mr-2 px-2 py-1 border border-gray-300 rounded-md"
+            className="mr-2 px-2 py-1 border border-gray-300 bg-white rounded-md"
             value={searchBy}
             onChange={handleSearchByChange}
           >
@@ -62,7 +62,7 @@ const typedata = {
           <input
             type="text"
             placeholder={`Search by ${searchBy}`}
-            className="px-2 py-1 border border-gray-300 rounded-md"
+            className="px-2 py-1 border border-gray-300 bg-white rounded-md"
             value={searchTerm}
             onChange={handleSearchChange}
           />

@@ -36,12 +36,12 @@ const TransactionHistory = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by ID"
-          className="px-4 py-2 border rounded-md"
+          className="px-4 py-2 border bg-[white] rounded-md"
         />
         <select
           value={searchOption}
           onChange={(e) => setSearchOption(e.target.value)}
-          className="px-4 py-2 border rounded-md"
+          className="px-4 py-2 border bg-[white] rounded-md"
         >
           <option value="sender">Search by Sender ID</option>
           <option value="receiver">Search by Receiver ID</option>

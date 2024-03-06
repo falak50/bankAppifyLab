@@ -112,7 +112,7 @@ const TransectionForm = ({sendMoneyID}) => {
     if(!historyCollected){
       historyCollected=[]
     }
-    historyCollected.push(history);
+    historyCollected.unshift(history);
     console.log('age  history ',historyCollected);
  
     const historyString = JSON.stringify(historyCollected);
@@ -137,7 +137,7 @@ const TransectionForm = ({sendMoneyID}) => {
                 Account Number:
             </label>
             <input
-                className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.accountNumber ? 'border-red-500' : ''}`}
+                className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.accountNumber ? 'border-red-500' : ''}`}
                 id="accountNumber"
                 type="text"
                 placeholder="Account Number"
@@ -169,7 +169,7 @@ const TransectionForm = ({sendMoneyID}) => {
                 Amount in {currency}:
             </label>
             <input
-    className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
+    className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
     id="amount"
     type="number"
     step="any" // Allow any decimal number

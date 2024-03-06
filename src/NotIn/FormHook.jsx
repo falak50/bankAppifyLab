@@ -35,7 +35,7 @@ const FormHook = () => {
          Name:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
+          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
           id="name"
           type="text"
           placeholder="Full Name"
@@ -49,7 +49,7 @@ const FormHook = () => {
           Email:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
+          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
           id="email"
           type="email"
           placeholder="Email"
@@ -62,7 +62,7 @@ const FormHook = () => {
           Phone:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.phone ? 'border-red-500' : ''}`}
+          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.phone ? 'border-red-500' : ''}`}
           id="phone"
           type="tel"
           placeholder="Phone"
@@ -76,7 +76,7 @@ const FormHook = () => {
           Age:
         </label>
         <input
-          className={`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.age ? 'border-red-500' : ''}`}
+          className={`shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.age ? 'border-red-500' : ''}`}
           id="age"
           type="number"
           placeholder="Age"

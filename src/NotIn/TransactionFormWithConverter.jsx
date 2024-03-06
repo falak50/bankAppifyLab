@@ -87,7 +87,7 @@ const TransactionFormWithConverter = () => {
                         Account Number:
                     </label>
                     <input
-                        className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.accountNumber ? 'border-red-500' : ''}`}
+                        className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.accountNumber ? 'border-red-500' : ''}`}
                         id="accountNumber"
                         type="text"
                         placeholder="Account Number"
@@ -100,7 +100,7 @@ const TransactionFormWithConverter = () => {
                         Amount:
                     </label>
                     <input
-                        className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
+                        className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
                         id="amount"
                         type="number"
                         placeholder="Amount"

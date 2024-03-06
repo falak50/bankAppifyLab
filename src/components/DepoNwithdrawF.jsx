@@ -83,7 +83,7 @@ const DepoNwithdrawF = ({id,type}) => {
     if(!historyCollected){
       historyCollected=[]
     }
-    historyCollected.push(historyDepoNwith);
+    historyCollected.unshift(historyDepoNwith);
     console.log('ager  historyDepoNwith ',historyCollected);
  
     const historyString = JSON.stringify(historyCollected);
@@ -128,7 +128,7 @@ const DepoNwithdrawF = ({id,type}) => {
                 Amount in {currency}:
             </label>
             <input
-    className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
+    className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.amount ? 'border-red-500' : ''}`}
     id="amount"
     type="number"
     step="any" // Allow any decimal number

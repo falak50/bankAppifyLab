@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddUser = () => {
-  const { register, handleSubmit ,reset , formState: { errors } } = useForm();
+  const { register, handleSubmit , reset , formState: { errors } } = useForm();
   const [isNavitage,setIsNavitage] =useState(false);
   
   const onSubmit = (data) => {
@@ -29,7 +29,7 @@ const AddUser = () => {
          Name:
         </label>
         <input
-  className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
+  className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
   id="name"
   type="text"
   placeholder="Full Name"
@@ -44,7 +44,7 @@ const AddUser = () => {
           Email:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
+          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
           id="email"
           type="email"
           placeholder="Email"
@@ -53,11 +53,11 @@ const AddUser = () => {
         {errors.email && <p className="text-red-500 text-xs italic">This field is required</p>}
       </div>
       <div className="mb-4 flex items-center gap-2">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+        <label className="block text-gray-700 bg-[white] text-sm font-bold mb-2" htmlFor="phone">
           Phone:
         </label>
         <input
-          className={`flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.phone ? 'border-red-500' : ''}`}
+          className={`flex-grow shadow appearance-none border rounded py-2 px-3 bg-[white] text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.phone ? 'border-red-500' : ''}`}
           id="phone"
           type="tel"
           placeholder="Phone"
@@ -67,11 +67,11 @@ const AddUser = () => {
         {errors.phone && errors.phone.type === "pattern" && <p className="text-red-500 text-xs italic">Phone number must be 11 digits</p>}
       </div>
       <div className="mb-4 flex items-center gap-2">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
+        <label className="block text-gray-700 bg-[white] text-sm font-bold mb-2" htmlFor="age">
           Age:
         </label>
         <input
-          className={`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.age ? 'border-red-500' : ''}`}
+          className={`shadow appearance-none border rounded py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline ${errors.age ? 'border-red-500' : ''}`}
           id="age"
           type="number"
           placeholder="Age"

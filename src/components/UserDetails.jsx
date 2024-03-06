@@ -7,22 +7,7 @@ import UserAmountConverter from './UserAmountConverter';
 
 const UserDetails = () => {
    const { id } = useParams();
-   // const [convertedAmount, setConvertedAmount] = useState(null);
-   /// work for currentcy 
-   // const [currency, setCurrency] = useState('BDT');
-   // const url = `https://open.er-api.com/v6/latest/${currency}`;
-   // const { data, loading , error } = useApiHook(url);
-
-   // useEffect(()=>{
-   //    setConvertedAmount(user.AmountBDT)
-   // },[])
-   // if (loading ) {     return <div>Loading...</div>;}
-   // if (error) {return <div>Error Transaction: {error.message}</div>; }
-   // console.log('data',data);
-   // const ratesObj = data.rates
   
-
-//   console.log(id);
   const typedata = {
   deposit:'deposit',
   withdraw:'withdraw',

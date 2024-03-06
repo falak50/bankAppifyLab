@@ -26,7 +26,7 @@ const UserDetailsDemo = ({ user, onUpdate, onDelete }) => {
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
           Name:
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
             placeholder="Full Name"
@@ -40,7 +40,7 @@ const UserDetailsDemo = ({ user, onUpdate, onDelete }) => {
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
           Email:
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Email"
@@ -54,7 +54,7 @@ const UserDetailsDemo = ({ user, onUpdate, onDelete }) => {
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
           Age:
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-[white] leading-tight focus:outline-none focus:shadow-outline"
             id="age"
             type="number"
             placeholder="Age"

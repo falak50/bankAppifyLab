@@ -2,10 +2,11 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import useApiHook from '../Data/useApiHook';
 import History from './History';
+import Swal from 'sweetalert2';
 
 const TransectionForm = ({sendMoneyID}) => {
  // console.log('sendMoneyID -> ',sendMoneyID)
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
   ////  DATA CALL
   
@@ -117,11 +118,20 @@ const TransectionForm = ({sendMoneyID}) => {
     const historyString = JSON.stringify(historyCollected);
     localStorage.setItem('history', historyString);
       // console.log('money transfer done and storelocal host')
+
+      reset();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Money Transfered successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
   };
 
   return (
     <div>
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-[40%] mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4 flex items-center gap-2">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="accountNumber">
                 Account Number:

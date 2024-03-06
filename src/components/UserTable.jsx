@@ -98,9 +98,9 @@ const typedata = {
       <td className="border px-4 py-2">{parseFloat(user.AmountBDT).toFixed(2)}</td>
       <td className="border px-4 py-2">
       <div className='flex flex-row gap-2'>
-    <Link to={`/transaction/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Transaction</Link>
-    <Link to={`/deposit/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Deposit</Link>
-    <Link to={`/withdraw/${user.uuid}`} className="text-blue-500 hover:text-blue-700">Withdraw</Link>
+      <Link to={`/transaction/${user.uuid}`} className="text-gray-500 hover:text-gray-700 bg-gray-200 px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300">Transaction</Link>
+      <Link to={`/deposit/${user.uuid}`} className="text-gray-500 hover:text-gray-700 bg-gray-200 px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300">Deposit</Link>
+      <Link to={`/withdraw/${user.uuid}`} className="text-gray-500 hover:text-gray-700 bg-gray-200 px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300">Withdraw</Link>
   </div>
       </td>
       <td className="border px-4 py-2">

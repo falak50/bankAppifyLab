@@ -1,9 +1,28 @@
 
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useApiHook from '../Data/useApiHook';
+import Converter from '../NotIn/Converter';
+import UserAmountConverter from './UserAmountConverter';
 
 const UserDetails = () => {
-  const { id } = useParams();
-  console.log(id);
+   const { id } = useParams();
+   // const [convertedAmount, setConvertedAmount] = useState(null);
+   /// work for currentcy 
+   // const [currency, setCurrency] = useState('BDT');
+   // const url = `https://open.er-api.com/v6/latest/${currency}`;
+   // const { data, loading , error } = useApiHook(url);
+
+   // useEffect(()=>{
+   //    setConvertedAmount(user.AmountBDT)
+   // },[])
+   // if (loading ) {     return <div>Loading...</div>;}
+   // if (error) {return <div>Error Transaction: {error.message}</div>; }
+   // console.log('data',data);
+   // const ratesObj = data.rates
+  
+
+//   console.log(id);
   const typedata = {
   deposit:'deposit',
   withdraw:'withdraw',
@@ -15,28 +34,27 @@ const UserDetails = () => {
   const userDeposit=JSON.parse(localStorage.getItem(typedata.deposit));
   const userTransection=JSON.parse(localStorage.getItem(typedata.history));
   console.log('userTransection -> ',userTransection)
-  //console.log("ALL deposite  :",userDeposit);
-  //  const  user = {
-  //   AmountBDT:870.367493277562,
-  //   age : "123",
-  //   email: "falakahmedshakib170@gmail.com",
-  //   name: "Falak Ahmed",
-  //   phone:"10123456781"
-  // }
+
+   // useEffect(()=>{
+   //    setConvertedAmount(user.AmountBDT)
+   // },[])
   return (
    <>
-   <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
+   <div className="bg-white border rounded-lg shadow-lg px-6 py-8 w-[60%] mx-auto mt-8">
     <h1 className="font-bold text-2xl my-4 text-center text-blue-600">Details Page</h1>
-
-    <div className="mb-8">
+     
+    <div className="mb-8 gap-1">
         <h2 className="text-lg font-bold mb-4">Personal Infromation :</h2>
         <div className="text-gray-700 mb-2">Name : {user.name}</div>
         <div className="text-gray-700 mb-2">Email : {user.email}</div>
         <div className="text-gray-700 mb-2">Phone : {user.phone}</div>
         <div className="text-gray-700 mb-2">Age : {user.age}</div>
-        <div className="text-gray-700">Acount Number : 213ydhgy238134679 </div>
-        <div className="text-gray-700">Amount In BDT :{parseFloat(user.AmountBDT).toFixed(2)}  </div>
+        <div className="text-gray-700 mb-2">Acount Number : <span className='text-sm'>{id}</span>  </div>
+        <UserAmountConverter  amount={user.AmountBDT}></UserAmountConverter>
+        {/* <div className="text-gray-700">Amount In  BDT :{parseFloat(user.AmountBDT).toFixed(2)}  </div> */}
     </div>
+
+    
     
     
     <div>
@@ -44,7 +62,8 @@ const UserDetails = () => {
         {userWithdraw &&
                userWithdraw.map((x,i)=>{
             console.log(x.uuid);
-            const str=`${x.date} :  ${x.type} ${x.amount} ${x.currency}`
+            const formattedDate = new Date(x.date).toLocaleString()
+            const str=`${formattedDate} :  Withdraw ${x.amount} ${x.currency}`
             if(x.uuid==id)
                return <li
                key={i}
@@ -58,7 +77,8 @@ const UserDetails = () => {
         {userDeposit &&
                userDeposit.map((x,i)=>{
             console.log(x.uuid);
-            const str=`${x.date} :   ${x.type} ${x.amount} ${x.currency}`
+            const formattedDate = new Date(x.date).toLocaleString();
+            const str=`${formattedDate} :   Deposit ${x.amount} ${x.currency}`
             if(x.uuid==id)
                return <li
                key={i}
@@ -76,7 +96,8 @@ const UserDetails = () => {
                 console.log('rid->',x?.receiveUser.uuid)
                 console.log('id->',id)
              console.log(x?.sendUser.uuid);
-            const str=`${x?.sendUser.name} Send ${
+             const formattedDate = new Date(x.date).toLocaleString();
+            const str=`${formattedDate} ${x?.sendUser.name} Send ${
                 x.amount} ${x.currency} to ${x.receiveUser.name}`
                 
             if(id==x.receiveUser.uuid || id==x.sendUser.uuid)
@@ -88,7 +109,7 @@ const UserDetails = () => {
 
     </div>
          
-    <div className="text-gray-700 mb-2">Thank you for your Open acount </div>
+ 
    
 </div>
 

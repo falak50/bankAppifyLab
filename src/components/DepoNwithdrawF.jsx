@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useApiHook from "../Data/useApiHook";
+import Swal from "sweetalert2";
 
 
 const DepoNwithdrawF = ({id,type}) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
   ////  DATA CALL
   
@@ -65,6 +66,7 @@ const DepoNwithdrawF = ({id,type}) => {
         }
         console.log('Update user ',user);
         localStorage.setItem(id,JSON.stringify(user));
+       
     }
 
     // ---- history 
@@ -87,11 +89,20 @@ const DepoNwithdrawF = ({id,type}) => {
     const historyString = JSON.stringify(historyCollected);
     localStorage.setItem(type, historyString);
 
+   reset();
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `Money ${type} successfully`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
   }
     return (
-        <div>
         
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        
+            <form onSubmit={handleSubmit(onSubmit) } className=" mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[40%] ">
         
         <div className="mb-4 flex items-center gap-2">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="currency">
@@ -133,14 +144,7 @@ const DepoNwithdrawF = ({id,type}) => {
             </button>
         </div>
     </form>
-    {convertedAmount && (
-        <div>
-            <p>
-                Converted amount: {convertedAmount.toFixed(2)} {base_code}
-            </p>
-        </div>
-    )}
-        </div>
+  
     );
 };
 

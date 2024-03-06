@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-
+import img from "../assets/appifyLabIMG.jpg"
 
 const Navber = () => {
     return (
         <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Bank</a>
+          <img src={img} className="w-[40px] h-[40px] rounded-lg" />
+          <a className="btn btn-ghost text-xl">AppifyLab Bank Ltd</a>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">

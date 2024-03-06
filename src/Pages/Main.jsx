@@ -4,9 +4,12 @@ import { Outlet } from 'react-router-dom';
 
 const Main = () => {
     return (
-        <div>
-            <Navber></Navber>
-            <Outlet></Outlet>
+        <div >
+            <Navber className="p-3" ></Navber>
+             <div className="p-3">
+             <Outlet ></Outlet>
+             </div>
+           
         </div>
     );
 };

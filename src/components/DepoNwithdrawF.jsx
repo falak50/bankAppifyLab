@@ -105,11 +105,11 @@ const DepoNwithdrawF = ({id,type}) => {
             <form onSubmit={handleSubmit(onSubmit) } className=" mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[40%] ">
         
         <div className="mb-4 flex items-center gap-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="currency">
+            <label className="block text-gray-700 bg-white text-sm font-bold mb-2" htmlFor="currency">
                 Select currency:
             </label>
             <select
-                className="flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700  bg-white leading-tight focus:outline-none focus:shadow-outline"
                 id="currency"
                 {...register("currency", { required: true })}
                 value={currency}

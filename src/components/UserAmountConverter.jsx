@@ -38,6 +38,7 @@ const UserAmountConverter= ({amount}) => {
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}
           onClick={handleConvert}
+          className='bg-white'
         >
           {Object.keys(ratesObj).map((currency) => (
             <option key={currency} value={currency}>

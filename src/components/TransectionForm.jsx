@@ -3,14 +3,15 @@ import { useState } from 'react';
 import useApiHook from '../Data/useApiHook';
 import History from './History';
 import Swal from 'sweetalert2';
-
+import { Navigate } from 'react-router-dom';
 const TransectionForm = ({sendMoneyID}) => {
  // console.log('sendMoneyID -> ',sendMoneyID)
+ const [isNavitage,setIsNavitage] =useState(false);
   const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
   ////  DATA CALL
   
-  const base_code = 'BDT';
+//   const base_code = 'BDT';
   const [currency, setCurrency] = useState('BDT');
   const url = `https://open.er-api.com/v6/latest/${currency}`;
   const { data, loading, error } = useApiHook(url);
@@ -85,49 +86,96 @@ const TransectionForm = ({sendMoneyID}) => {
       // check done 
       const sendUser=JSON.parse(localStorage.getItem(sendMoneyID));
       console.log("main function ",sendUser);
-      const curSendUser = sendUser;
-      curSendUser.AmountBDT=curSendUser.AmountBDT-sendAmount;
-      console.log('current user ',curSendUser);
-      localStorage.setItem(sendMoneyID,JSON.stringify(curSendUser));
       const receiveUser=JSON.parse(localStorage.getItem(data.accountNumber));
-      const curReceiveUser = receiveUser;
-      curReceiveUser.AmountBDT=curReceiveUser.AmountBDT+sendAmount;
-      console.log('current user ',curReceiveUser);
-      localStorage.setItem(data.accountNumber,JSON.stringify(curReceiveUser));
+      Swal.fire({
+        title: "Are you sure?",
+        text: `You are going to transfer ${data.amount} ${data.currency} from  ${sendUser.name} (${sendUser.accountNumber}) to  ${receiveUser.name} (${receiveUser.accountNumber}).`  ,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Send"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const curSendUser = sendUser;
+            curSendUser.AmountBDT=curSendUser.AmountBDT-sendAmount;
+            console.log('current user ',curSendUser);
+            localStorage.setItem(sendMoneyID,JSON.stringify(curSendUser));
+           
+            const curReceiveUser = receiveUser;
+            curReceiveUser.AmountBDT=curReceiveUser.AmountBDT+sendAmount;
+            
+            console.log('current user ',curReceiveUser);
+            localStorage.setItem(data.accountNumber,JSON.stringify(curReceiveUser));
+            
+          const currentDate = new Date(); 
+          sendUser.uuid=sendMoneyID;
+          receiveUser.uuid=data.accountNumber;
+          const type='transfer';
+          const history = {
+              sendUser: sendUser,
+              receiveUser: receiveUser,
+              date: currentDate,
+              currency: data.currency, 
+              amount: data.amount,
+              type:type
+          };
+          console.log(history)
+          let historyCollected=JSON.parse(localStorage.getItem('history'))
+          if(!historyCollected){
+            historyCollected=[]
+          }
+          historyCollected.unshift(history);
+          console.log('age  history ',historyCollected);
+       
+          const historyString = JSON.stringify(historyCollected);
+          localStorage.setItem('history', historyString);
+            
+          
+
+        //  ...navigation 
+        Swal.fire({
+            title: "Money Transfered successfully",
+            text: "Continue the transaction from this account?",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Continue",
+            cancelButtonText: "No, Cancel" 
+          }).then((result) => {
+            if (!result.isConfirmed) {
+             console.log('no');
+             setIsNavitage(true);
+             reset();
+            }else {
+                reset();
+            }
+          });
+
+          
+        }
+      });
+
+
+    
+
       
-    const currentDate = new Date(); 
-    sendUser.uuid=sendMoneyID;
-    receiveUser.uuid=data.accountNumber;
-    const type='transfer';
-    const history = {
-        sendUser: sendUser,
-        receiveUser: receiveUser,
-        date: currentDate,
-        currency: data.currency, 
-        amount: data.amount,
-        type:type
-    };
-    console.log(history)
-    let historyCollected=JSON.parse(localStorage.getItem('history'))
-    if(!historyCollected){
-      historyCollected=[]
-    }
-    historyCollected.unshift(history);
-    console.log('age  history ',historyCollected);
- 
-    const historyString = JSON.stringify(historyCollected);
-    localStorage.setItem('history', historyString);
       // console.log('money transfer done and storelocal host')
 
-      reset();
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Money Transfered successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
+    //   reset();
+    //   Swal.fire({
+    //     position: "top-end",
+    //     icon: "success",
+    //     title: "Money Transfered successfully",
+    //     showConfirmButton: false,
+    //     timer: 1500
+    //   });
   };
+
+  if(isNavitage){
+    return <Navigate to="/"  replace></Navigate>
+  }
 
   return (
     <div>

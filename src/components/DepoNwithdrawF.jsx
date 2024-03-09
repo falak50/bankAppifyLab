@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useApiHook from "../Data/useApiHook";
 import Swal from "sweetalert2";
+import { Navigate } from "react-router-dom";
 
 
 const DepoNwithdrawF = ({id,type}) => {
+    const [isNavitage,setIsNavitage] =useState(false);
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
   ////  DATA CALL
@@ -90,14 +92,38 @@ const DepoNwithdrawF = ({id,type}) => {
     localStorage.setItem(type, historyString);
 
    reset();
-    Swal.fire({
-        position: "top-end",
+    // Swal.fire({
+    //     position: "top-end",
+    //     icon: "success",
+    //     title: `Money ${type} successfully`,
+    //     showConfirmButton: false,
+    //     timer: 1500
+    //   });
+
+      //  ...navigation 
+      Swal.fire({
+        title: `${data.amount} ${data.currency}  ${type} successfully`,
+        text: `Continue the ${type} from this account?`,
         icon: "success",
-        title: `Money ${type} successfully`,
-        showConfirmButton: false,
-        timer: 1500
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Continue",
+        cancelButtonText: "No, Cancel" 
+      }).then((result) => {
+        if (!result.isConfirmed) {
+         console.log('no');
+         setIsNavitage(true);
+         reset();
+        }else {
+            reset();
+        }
       });
 
+  }
+
+  if(isNavitage){
+    return <Navigate to="/"  replace></Navigate>
   }
     return (
         

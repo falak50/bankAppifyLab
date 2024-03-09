@@ -1,20 +1,28 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const AddUser = () => {
   const { register, handleSubmit , reset , formState: { errors } } = useForm();
   const [isNavitage,setIsNavitage] =useState(false);
   
   const onSubmit = (data) => {
-    const uuid = uuidv4();
+    console.log('hello')
+    // const uuid = uuidv4();
     const AmountBDT=1000
     const formData = { ...data, AmountBDT };
-    // console.log(formData)
-   localStorage.setItem(uuid , JSON.stringify(formData));
-    //   reset(); //add later
-     setIsNavitage(true)
+ 
+    const already = JSON.parse(localStorage.getItem(formData.accountNumber))
+    if(already){
+      alert('This Account Number is already in use');
+      return;
+    }
+
+    console.log('accountNumber : ',formData.accountNumber)
+    localStorage.setItem(data.accountNumber , JSON.stringify(formData));
+      reset(); 
+     setIsNavitage(true);
     
   };
   
@@ -39,6 +47,27 @@ const AddUser = () => {
 {errors.name && errors.name.type === "pattern" && <p className="text-red-500 text-xs italic">Name must contain only letters</p>}
 
       </div>
+  {/* ---  anount number star */}
+  <div className="mb-4 flex items-center gap-2">
+  <label className="block text-gray-700 bg-[white] text-sm font-bold mb-2" htmlFor="accountNumber">
+    Account Number:
+  </label>
+  <input
+    className={`flex-grow shadow appearance-none border rounded py-2 px-3 bg-[white] text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.accountNumber ? 'border-red-500' : ''}`}
+    id="accountNumber"
+    type="tel"
+    placeholder="Account Number"
+    {...register("accountNumber", { required: true, pattern: /^[0-9]{4,}$/ })}
+  />
+  {errors.accountNumber && errors.accountNumber.type === "required" && <p className="text-red-500 text-xs italic">This field is required</p>}
+  {errors.accountNumber && errors.accountNumber.type === "pattern" && <p className="text-red-500 text-xs italic">Account number must be 4 digits or longer</p>}
+</div>
+
+
+      {/* acount number end  */}
+       
+       
+
       <div className="mb-4 flex items-center gap-2">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
           Email:
